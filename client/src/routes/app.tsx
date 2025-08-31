@@ -5,10 +5,14 @@ import styles from "./app.module.css";
 import type { Insight } from "../schemas/insight.ts";
 
 export const App = () => {
-  const [insights, setInsights] = useState<Insight>([]);
+  const [insights, setInsights] = useState<Insight[]>([]);
 
   useEffect(() => {
-    fetch(`/api/insights`).then((res) => setInsights(res.json()));
+    (async() => {
+      const res = await fetch(`/api/insights`);
+      const data = await res.json();
+      setInsights(data);
+    })();
   }, []);
 
   return (

@@ -6,7 +6,7 @@ import process from "node:process";
 
 const env = {
   clientPort: Port.parse(Deno.env.get("CLIENT_PORT")),
-  servereBaseUrl: String(Deno.env.get("SERVER_BASE_URL")),
+  serverBaseUrl: String(Deno.env.get("SERVER_BASE_URL")),
   serverPort: Port.parse(Deno.env.get("SERVER_PORT")),
 };
 
@@ -24,9 +24,8 @@ export default defineConfig({
     },
     proxy: {
       "/api": {
-        target: `${env.servereBaseUrl}:${env.serverPort}`,
+        target: `${env.serverBaseUrl}:${env.serverPort}`,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
