@@ -1,9 +1,11 @@
+_Crafted by [Emanuele Bottos](https://www.linkedin.com/in/ebottos/), as part of the Tracksuit take-home project._
+
 # Tracksuit Take-Home Project
 
 Hi 👋 — this repo contains my submission for the Tracksuit take-home.\
 I focused less on “just make it work” and more on “make it organised,
 future-proof, and easy to extend.”\
-(Also: sorry Chuggs, I completely trashed your server code… but you’ll never
+(Also: sorry Chuggs, I completely trashed your server code… but you’ll never 
 know 😉)
 
 ---
