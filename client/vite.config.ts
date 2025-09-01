@@ -26,6 +26,7 @@ export default defineConfig({
       "/api": {
         target: `${env.serverBaseUrl}:${env.serverPort}`,
         changeOrigin: true,
+        secure: false,
       },
     },
   },

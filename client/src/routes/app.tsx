@@ -15,10 +15,24 @@ export const App = () => {
     })();
   }, []);
 
+  // append newly created insight to the top of the list
+  const handleCreated = (created: Insight) => {
+    setInsights(prev => [created, ...prev]);
+  };
+
+  // remove from UI after successful delete
+  const handleDeleted = (id: number) => {
+    setInsights((prev) => prev.filter((i) => i.id !== id));
+  };
+
   return (
     <main className={styles.main}>
-      <Header />
-      <Insights className={styles.insights} insights={insights} />
+      <Header onCreated={handleCreated} />
+      <Insights 
+        className={styles.insights} 
+        insights={insights}
+        onDeleted={handleDeleted} 
+      />
     </main>
   );
 };

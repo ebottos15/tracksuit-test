@@ -38,7 +38,6 @@ export const AddInsight = ({onCreated, onClose, ...props }: AddInsightProps) => 
         }
       const created: Insight = await res.json(); // { id, brand, createdAt, text }
       onCreated?.(created);
-
       // reset + close
       setText("");
       setBrand(BRANDS[0]?.id ?? 1);
@@ -55,7 +54,12 @@ export const AddInsight = ({onCreated, onClose, ...props }: AddInsightProps) => 
       <h1 className={styles.heading}>Add a new insight</h1>
       <form className={styles.form} onSubmit={addInsight}>
         <label className={styles.field}>
-          <select className={styles["field-input"]}>
+          <select 
+            className={styles["field-input"]}
+            value={brand}
+            onChange={(e) => setBrand(Number(e.target.value))}
+            disabled={submitting}
+          >
             {BRANDS.map(({ id, name }) => <option key={id} value={id}>{name}</option>)}
           </select>
         </label>
