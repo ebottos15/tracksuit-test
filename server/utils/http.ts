@@ -8,6 +8,7 @@ export type JsonBodyReader = { value: Promise<unknown> };
 export interface OakRequest {
   body: (opts?: { type: "json" }) => JsonBodyReader;
 }
+
 export interface OakResponse {
   status: number;
   body?: unknown;

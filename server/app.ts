@@ -1,7 +1,6 @@
 // Bootstraps the HTTP server, database, repositories, services, and routes.
 import { Application, Router } from "@oak/oak";
 import { join } from "jsr:@std/path/join";
-//import { fromFileUrl } from "jsr:@std/path/from-file-url";
 import { openDb } from "./db/client.ts";
 import { InsightsRepository } from "./repositories/insights.repo.ts";
 import { InsightsService } from "./services/insights.service.ts";
