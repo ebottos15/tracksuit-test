@@ -71,7 +71,7 @@ async function main(): Promise<void> {
   router.get("/_health", (ctx) => {
     ctx.response.status = 200;
     ctx.response.type = "application/json";
-    ctx.response.body = { status: "ok" };
+    ctx.response.body = { ok: true };
   });
   registerInsightsRoutes(router, insightsCtrl);
 

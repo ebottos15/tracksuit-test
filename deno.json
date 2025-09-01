@@ -16,5 +16,8 @@
     "lib": ["deno.ns", "dom", "dom.iterable", "dom.asynciterable"],
     "jsx": "react-jsx",
     "jsxImportSource": "react"
-  }
+  },
+  "exclude": [
+    "./client/**/*.css"
+  ]
 }

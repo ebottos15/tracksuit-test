@@ -1,66 +1,87 @@
-# Take-Home Test (TypeScript)
+# Tracksuit Take-Home Project
 
-This is a template for a take-home test. See the [Instructions][Instructions]
-for details on the activity.
+Hi 👋 — this repo contains my submission for the Tracksuit take-home.\
+I focused less on “just make it work” and more on “make it organised,
+future-proof, and easy to extend.”\
+(Also: sorry Chuggs, I completely trashed your server code… but you’ll never
+know 😉)
 
-**Set Up Your Repository**
+---
 
-1. On the top right corner of this page, click the "Use this template" button
-2. Select "Create Your Own Repository" from the dropdown
-3. Give the repository a name under your Github account, and click "Create a new repository"
-4. Follow the below instructions to complete the exercise
+## Server
 
-**Submit Your Work**
+The original backend handled a couple of endpoints and one table, but wasn’t
+designed to grow.\
+So I refactored it into a more structured architecture:
 
-Once you’ve completed the task, please add the `tracksuit-technical-test` Github user as a collaborator, and share the repo link with the talent manager.
+- **Folder structure & pattern**\
+  Split responsibilities into:
+  - `repositories/` → SQL only
+  - `services/` → business logic, transactions, error checks
+  - `controllers/` → HTTP ↔ service glue, input validation, error handling
+  - `routes/` → connect controllers to Oak router\
+    Clear separation means easier reading, testing, and future features.
 
-<!-- Link definitions -->
+- **Database migrations**\
+  Before: run app → “no such table” error 🙃\
+  Now: `server/db/migrations/` holds SQL schema files. They auto-run on startup
+  so the DB is always ready.
 
-[DenoInstall]: https://docs.deno.com/runtime/getting_started/installation/
-[Flake]: ./flake.nix
-[Instructions]: ./Instructions.md
+- **SQL queries**\
+  Queries live in `server/db/queries/…` files, loaded once into memory.\
+  Easier to read, test, and maintain than inline strings.
 
-## Setup
+- **New endpoints**
+  - `POST /api/insights` → create a new insight
+  - `DELETE /api/insights/:id` → delete an insight\
+    Following REST conventions instead of overusing GET.
 
-Install Deno 2 using your preferred method--typically this would be your
-system's package manager. See [Deno's installation instructions][DenoInstall] to
-find the command that's right for you.
+- **Error handling**\
+  Centralised in `utils/errors.ts`.
+  - 404 for missing insights
+  - 400 for invalid input (with Zod issues if validation fails)
+  - 500 for unexpected errors\
+    Clean messages without leaking stack traces.
 
-<!-- deno-fmt-ignore-start -->
+- **Testing**
+  - _Unit tests_ for services (business logic in isolation).
+  - _E2E tests_ hitting the actual API with a temp DB (happy paths for
+    create/list/delete).\
+    Both live in `server/test/` for clarity.
 
-> [!Tip]
-> Nix users can use `nix develop` to install tools declared in this repo's
-> [Flake][] .
+---
 
-<!-- deno-fmt-ignore-end -->
+## Client
 
-This repo was developed against Deno 2.1.2.
+The frontend needed a few fixes and new features:
 
-## Common tasks
+- **Type consistency**\
+  Fixed mismatches between server and client types so `Insight` means the same
+  thing everywhere.
 
-Most of the commands you'll need are provided by the Deno toolchain. You can run
-tasks either from the repo root or within each package
+- **Creation & deletion**\
+  Added a modal form to create new insights and a delete flow to remove them.\
+  The list of insights updates in real-time — no manual refresh needed.
 
-### Running client and server
+- **Delete confirmation**\
+  Reused the existing `Modal` component to confirm before deleting.\
+  Prevents accidental “oops” deletes.
 
-```sh
-deno task dev
-```
+- **UI polish & bugfixes**\
+  Tidied naming conventions, fixed state handling, and surfaced API errors with
+  proper messages.
 
-### Typechecking
+---
 
-```sh
-deno check .
-```
+## Wrap-up
 
-### Linting
+The codebase is still small, but now it’s organised like a real project that can
+scale and survive multiple developers touching it.\
+It has clear layering, predictable error handling, working migrations, and tests
+that prove the core flows.
 
-```sh
-deno lint
-```
+For my thoughts on how this could grow into a platform that supports a
+20-engineer team (and earns us that helicopter full of sequential USD bills),
+see [ExtraForExperts.md](./ExtraForExperts.md).
 
-### Formatting
-
-```
-deno fmt
-```
+That’s the story behind the refactor 🚀
