@@ -1,11 +1,12 @@
-_Crafted by [Emanuele Bottos](https://www.linkedin.com/in/ebottos/), as part of the Tracksuit take-home project._
+_Crafted by [Emanuele Bottos](https://www.linkedin.com/in/ebottos/), as part of
+the Tracksuit take-home project._
 
 # Tracksuit Take-Home Project
 
 Hi 👋 — this repo contains my submission for the Tracksuit take-home.\
 I focused less on “just make it work” and more on “make it organised,
 future-proof, and easy to extend.”\
-(Also: sorry Chuggs, I completely trashed your server code… but you’ll never 
+(Also: sorry Chuggs, I completely trashed your server code… but you’ll never
 know 😉)
 
 ---
@@ -69,9 +70,8 @@ The frontend needed a few fixes and new features:
   Reused the existing `Modal` component to confirm before deleting.\
   Prevents accidental “oops” deletes.
 
-- **UI polish & bugfixes**\
-  Tidied naming conventions, fixed state handling, and surfaced API errors with
-  proper messages.
+- **Bugfixes**\
+  Tidied naming conventions and fixed state handlings.
 
 ---
 
