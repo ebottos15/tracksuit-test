@@ -19,5 +19,8 @@
   },
   "exclude": [
     "./client/**/*.css"
+  ],
+  "plugins": [
+    "https://deno.land/x/deno_ts_plugin@0.17.0/mod.ts"
   ]
 }
